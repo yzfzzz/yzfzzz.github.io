@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Hexo+GitHub+Vercel搭建个人博客网站 - FengLibrary</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="FengLibrary"><meta name="msapplication-TileImage" content="/img/book.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="FengLibrary"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="⭐前段时间动手搭了一个博客网站 FengLibrary ，主要是用了Hexo+GitHubPages+Vercel框架。  环境搭建：nodejs+Git； 写作：Typora,PicGo+阿里云OSS 域名管理：namesilo"><meta property="og:type" content="blog"><meta property="og:title" content="Hexo+GitHub+Vercel搭建个人博客网站"><meta property="og:url" content="http://example.com/2022/04/02/Hexo+GitHub+Vercel%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/"><meta property="og:site_name" content="FengLibrary"><meta property="og:description" content="⭐前段时间动手搭了一个博客网站 FengLibrary ，主要是用了Hexo+GitHubPages+Vercel框架。  环境搭建：nodejs+Git； 写作：Typora,PicGo+阿里云OSS 域名管理：namesilo"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/2022/04/02/Hexo+GitHub+Vercel%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/2.png"><meta property="article:published_time" content="2022-04-02T05:31:01.651Z"><meta property="article:modified_time" content="2022-04-02T06:32:32.400Z"><meta property="article:author" content="Ye Zifeng"><meta property="article:tag" content="网站搭建"><meta property="article:tag" content="Hexo"><meta property="article:tag" content="GitHub"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/2022/04/02/Hexo+GitHub+Vercel%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/2.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/04/02/Hexo+GitHub+Vercel%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/"},"headline":"Hexo+GitHub+Vercel搭建个人博客网站","image":["http://example.com/2022/04/02/Hexo+GitHub+Vercel%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/2.png"],"datePublished":"2022-04-02T05:31:01.651Z","dateModified":"2022-04-02T06:32:32.400Z","author":{"@type":"Person","name":"Ye Zifeng"},"publisher":{"@type":"Organization","name":"FengLibrary","logo":{"@type":"ImageObject","url":"http://example.com/img/bag.png"}},"description":"⭐前段时间动手搭了一个博客网站 FengLibrary ，主要是用了Hexo+GitHubPages+Vercel框架。  环境搭建：nodejs+Git； 写作：Typora,PicGo+阿里云OSS 域名管理：namesilo"}</script><link rel="canonical" href="http://example.com/2022/04/02/Hexo+GitHub+Vercel%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/"><link rel="icon" href="/img/book.png"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.15.2/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/bag.png" alt="FengLibrary" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yzfzzz"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-04-02T05:31:01.651Z" title="2022/4/2 13:31:01">2022-04-02</time>发表</span><span class="level-item"><time dateTime="2022-04-02T06:32:32.400Z" title="2022/4/2 14:32:32">2022-04-02</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Hexo/">Hexo</a></span><span class="level-item">16 分钟读完 (大约2418个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">Hexo+GitHub+Vercel搭建个人博客网站</h1><div class="content"><p>⭐前段时间动手搭了一个博客网站 <a target="_blank" rel="noopener" href="https://www.yzfenglib.top/">FengLibrary</a> ，主要是用了Hexo+GitHubPages+Vercel框架。</p>
+<ul>
+<li>环境搭建：nodejs+Git；</li>
+<li>写作：Typora,PicGo+阿里云OSS</li>
+<li>域名管理：namesilo</li>
+</ul>
+<span id="more"></span> 
+
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><h3 id="安装nodejs"><a href="#安装nodejs" class="headerlink" title="安装nodejs"></a>安装nodejs</h3><p>Hexo是一个快速、简洁且高效的博客框架。</p>
+<p>因为Hexo是基于nodejs的，所以要使用Hexo，那么第一步肯定是安装nodejs</p>
+<p>nodejs下载地址：<a target="_blank" rel="noopener" href="http://nodejs.cn/">http://nodejs.cn/</a></p>
+<p>直接安装，完成后，在cmd上输入<code>node -v</code>和<code>npm -v</code>查看是否安装成功，这两条命令如果都输出了版本号，那么就表示安装成功了，如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">-&gt; v16<span class="number">.14</span><span class="number">.0</span></span><br><span class="line">npm -v</span><br><span class="line">-&gt; <span class="number">8.3</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+
+<p>nodejs准备就绪了，那么现在就可以有请第一位主角Hexo出场了</p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>安装完之后，因为nodejs仓库会被墙掉，所以我们需要更换为国内镜像仓库</p>
+<p>在终端中执行：</p>
+<p><code>npm config set registry https://registry.npm.taobao.org</code></p>
+<p>执行命令</p>
+<p><code>npm install hexo-cli -g</code></p>
+<p>若出现Hexo的相关信息则表示Hexo安装成功</p>
+<h3 id="初始化Hexo博客（个人网站）文件夹"><a href="#初始化Hexo博客（个人网站）文件夹" class="headerlink" title="初始化Hexo博客（个人网站）文件夹"></a>初始化Hexo博客（个人网站）文件夹</h3><p>cmd命令进入你电脑的D盘，新建Hexo文件夹，如下：</p>
+<p><img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021423335.png" alt="命令行显示"></p>
+<p>执行命令：<code>hexo init blog</code></p>
+<p>blog 为创建的目录，你可以自己定义。使用终端进入到创建好的文件夹blog</p>
+<p>执行命令用于更新nodejs的模块：<code>npm install</code></p>
+<p>尝试执行命令：<code>hexo server</code></p>
+<p>如果有如下输出</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http:<span class="comment">//localhost:4000 . Press Ctrl+C to stop.</span></span><br></pre></td></tr></table></figure>
+
+<p>说明Hexo的服务已经启动成功了，你可以在你的浏览器访问就会出现你的博客（个人网站）主页了</p>
+<p>复制上文中的<code>http://localhost:4000</code>并在浏览器中打开</p>
+<p>这样，你就可以看到你的网站在本地的部署</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021423931.webp" alt="Hexo界面" style="zoom:67%;" />
+
+
+
+
+
+<h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><h3 id="新建仓库"><a href="#新建仓库" class="headerlink" title="新建仓库"></a>新建仓库</h3><p>前往 <a target="_blank" rel="noopener" href="https://github.com/">GitHub</a> 注册属于你的账号 (请及时验证邮箱地址)</p>
+<p>新建一个仓库，而且得确保你的仓库是 <code>public</code>，同时，仓库名最好是<code>用户名.github.io</code></p>
+<p>打开 <code>Git Bash</code> ，运行下面的命令 :</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;&#123;&#123;你的电子邮箱地址&#125;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>连续 3 次回车，最终会在用户目录下生成个包含公钥私钥等数据的目录 ( 一般是 <code>C:/Users/&#123;&#123;你的用户名&#125;&#125;/.ssh/</code> ) 。</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021424793.jpeg" alt="ssh密钥配置" style="zoom:80%;" />
+
+<p>打开这个目录，找到 <code>id_rsa.pub</code> 文件，用记事本打开并复制里面的内容</p>
+<p>粘贴到GitHub仓库的 <code>Key</code> 中，<code>Title</code> 填你喜欢的，点击保存 ( <code>Add SSH Key</code> ) </p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021425424.jpeg" alt="在GitHub中输入密钥" style="zoom:80%;" />
+
+
+
+
+
+<h3 id="设置-Git"><a href="#设置-Git" class="headerlink" title="设置 Git"></a>设置 Git</h3><p>运行下方命令 :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --<span class="keyword">global</span> user.name <span class="string">&quot;&#123;&#123;你的 GitHub username&#125;&#125;&quot;</span></span><br><span class="line">git config --<span class="keyword">global</span> user.email <span class="string">&quot;&#123;&#123;你的 GitHub 注册邮箱地址&#125;&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="验证是否成功"><a href="#验证是否成功" class="headerlink" title="验证是否成功"></a>验证是否成功</h3><p>打开 <code>Git Bash</code> ，运行下面的命令 :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com <span class="comment"># 此处邮箱地址不用改</span></span><br></pre></td></tr></table></figure>
+
+<p>如果提示 <code>Are you sure you want to continue connecting (yes/no)?</code> 请输入 <code>yes</code> 并回车。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi &#123;&#123;你的 GitHub username&#125;&#125;! Yo<span class="string">u&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br></pre></td></tr></table></figure>
+
+<p>看到这个信息则说明配置成功。</p>
+<h3 id="部署到-GitHub"><a href="#部署到-GitHub" class="headerlink" title="部署到 GitHub"></a>部署到 GitHub</h3><p>完成上面的步骤后，你应该能在本地进行预览了，接下来就是推送网站到 Github Pages 了，然后我们就能被其他人访问了。</p>
+<p>只需要在我们刚才的博客根目录中的站点配置文件 <code>_config.yml</code> ，设置为你的个人仓库名即可</p>
+<p>_config.yml在你的Hexo文件夹下面</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021425834.png" alt="config.yml地址" style="zoom: 67%;" />
+
+<p>记事本打开它（VSCode，NodePad++也OK）</p>
+<p>找到最后一行，修改它</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021430181.png" alt="deploy修改" style="zoom:80%;" />
+
+<p>在你新建的仓库这里，可以找到repo，复制它</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021430661.png" alt="repo链接" style="zoom: 67%;" />
+
+
+
+<p>在Hexo文件夹这个位置，点击<code>GitBash</code>，然后依次执行以下命令</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021430498.png" alt="GitBash" style="zoom: 75%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>完成上述步骤之后，主要使用如下命令，就能将我们本地的内容推送到远程 GitHub 仓库了，然后在浏览器中访问：</p>
+<p><code>https://用户名.github.io</code></p>
+<h2 id="主题优化"><a href="#主题优化" class="headerlink" title="主题优化"></a>主题优化</h2><p>你可以通过更换主题，并写上你的名字以便修改自己网站的信息并美化它</p>
+<p>我用的是icarus主题：<a target="_blank" rel="noopener" href="https://github.com/AlphaLxy/hexo-theme-icarus">https://github.com/AlphaLxy/hexo-theme-icarus</a></p>
+<p>你可以通过链接去下载它，并通过参考文档（<a target="_blank" rel="noopener" href="https://ppoffice.github.io/hexo-theme-icarus/Configuration/icarus%E7%94%A8%E6%88%B7%E6%8C%87%E5%8D%97-cdn%E6%8F%90%E4%BE%9B%E5%95%86/">Icarus中文文档</a>）改变它</p>
+<p>最后效果如下:</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431290.png" alt="icarus主题" style="zoom:67%;" />
+
+
+
+<h2 id="镜像加速"><a href="#镜像加速" class="headerlink" title="镜像加速"></a>镜像加速</h2><p>我们知道，GitHub是国外网站，所以有时候访问会很慢，这时，我们可以尝试用<a target="_blank" rel="noopener" href="https://vercel.com/">vercel</a>加速博客访问。</p>
+<h3 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h3><p>进入登陆页面：<a target="_blank" rel="noopener" href="https://vercel.com/login%EF%BC%8C%E4%BD%BF%E7%94%A8">https://vercel.com/login，使用</a> GitHub 账号登陆即可、</p>
+<h3 id="导入项目"><a href="#导入项目" class="headerlink" title="导入项目"></a>导入项目</h3><img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431655.png" alt="vercel" style="zoom: 50%;" />
+
+<p>点击<code>Continue</code>，进入如下界面。</p>
+<p>这大概就是大家看到的页面，点击 <code>New Project</code> 按钮，然后点击 <code>Browse All Templates →</code> 按钮，在第 4 行的第 1 个就是 Hexo</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431403.png" alt="vercel-Hexo"  />
+
+<p>点击进去，可以看到图片所示的内容</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431928.png" alt="映射仓库"  />
+
+<p>选择灰框勾选的内容，也就是你的 GitHub，然后点击 <code>Select</code> 按钮，然后点击 <code>GitHub</code> 在 <code>GIT SCOPE</code> 处选择你想要储存 Hexo 的用户，在 <code>REPOSITORY NAME</code> 处填上你想要储存 Hexo 的仓库(你Hexo存放的仓库)，并勾选 <code>Create private Git Repository</code> 选项，这个选项是将该仓库设为私有仓库，对他人不可见。然后点击 <code>Continue</code> 按钮，然后什么都不需要修改，直接点击 Deploy，等待它自动完成构建，3 分钟之内完成，并分发一个免费的二级域名，可以暂时用于使用（不会回收，但不建议使用）</p>
+<p><img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431674.png" alt="映射成功"></p>
+<p>部署完成后，它就和你刚刚所填写的仓库绑定了，一旦你的仓库有什么变化，它就会自动同步部署，全过程大概 5 分钟可以完成部署。</p>
+<p>这样，访问 Vercel 给你的域名（类似于<code>https://用户名.github.io-vercel/</code>），就能加速访问你的网站了</p>
+<h2 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h2><p>其实用上面的域名也可以访问，但为了显得专业点，我们可以买个域名绑定它（<code>https://用户名.github.io-vercel/</code>）</p>
+<p>如：<code>https://www.yzfenglib.top/</code></p>
+<h3 id="账户注册"><a href="#账户注册" class="headerlink" title="账户注册"></a>账户注册</h3><p>进入 <a href="https://link.zhihu.com/?target=https://www.namesilo.com/?rid=d27fa32do">Namesilo</a> ，点击右上角 <strong>“Create New Account”</strong> 注册账号。</p>
+<p>* 为必填内容，建议如实填写；勾选 “Keep my information private” 默认使用隐私保护，保护我们的注册信息。</p>
+<p>&#x3D;&#x3D;注意所有信息都必须是英文的&#x3D;&#x3D;</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431208.png" alt="注册Namesilo" style="zoom: 67%;" />
+
+<p>最后输入验证码，<strong>“Create New Account”</strong>，会收到验证邮件，点击链接激活完成注册</p>
+<h3 id="购买流程"><a href="#购买流程" class="headerlink" title="购买流程"></a>购买流程</h3><ul>
+<li><strong>Step 1</strong></li>
+</ul>
+<p>激活账户并登陆，进入主页，在搜索框中输入想要注册的域名，<strong>“SEARCH”</strong></p>
+<p><img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431983.png" alt="验证"></p>
+<ul>
+<li><strong>Step 2</strong></li>
+</ul>
+<p>勾选需要的域名后缀，<strong>“REGISTER”</strong>。如果该域名已被注册，会显示为橙色的 “Registered” 状态，绿色表示可注册。</p>
+<p><img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431546.png" alt="购买域名"></p>
+<ul>
+<li><strong>Step 3</strong></li>
+</ul>
+<p>确认订单，设置域名续费规则、注册时长等。输入优惠码 <code>okoff</code> 或者 <code>go2think</code> ，点击 “Submit”应用，优惠一美元。</p>
+<p>完成后点击 <strong>“CONTINUE”</strong> 进入下一步。</p>
+<ul>
+<li><strong>Step 4</strong></li>
+</ul>
+<p>付款。支持支付宝、Paypal 等。支付宝付款：在右侧输入框填写支付宝绑定的邮箱，点击 <strong>“GO”</strong> 跳转扫码界面支付</p>
+<p><img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431037.png" alt="支付宝支付"></p>
+<p>完成！🧡</p>
+<p>我是在NameSilo购买的域名，所以就进入NameSilo的管理页面：</p>
+<p><img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431151.jpeg" alt="域名解析"></p>
+<p>选中需要配置的域名，点击上方的Change Nameservers可以更换Name server（我这里已经改过了），点击右侧小小的蓝球可以配置DNS。</p>
+<p>把Name Servers改成Vercel提供的两个server（把NameServer 3删除了，添上这两个，要一模一样）</p>
+<p><img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431276.jpeg" alt="NameServer更改"></p>
+<p>然后按Vercel的要求把DNS改为</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431497.jpeg" alt="DNS更改" style="zoom: 80%;" />
+
+
+
+<p>PS：NameServer、DNS可以在Vercel找到</p>
+<p>进入这个Vercel deployment的界面：</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431449.jpeg" alt="进入deployment" style="zoom:67%;" />
+
+
+
+<p>点View Domains就会直接跳到配置域名的选项：</p>
+<img src="https://yzfzzz.oss-cn-shenzhen.aliyuncs.com/image/202204021431561.jpeg" alt="配置域名" style="zoom:80%;" />
+
+
+
+<p>输入你购买的域名（<code>https://www.yzfenglib.top/</code>）点击<code>add</code>就能绑定域名了</p>
+<p>以后想要修改网站的话，只需要将改动push到GitHub上，vercel会自动把改动同步过来，完全不用管，超省心。</p>
+<p>在一级域名配置好之后，也可以直接在vercel中使用二级域名，无需进行额外设置。</p>
+<p>写作我用的是：Typora,PicGo+阿里云OSS，<a target="_blank" rel="noopener" href="https://blog.csdn.net/muxuen/article/details/122441469#comments_20567956">Typora+PicGo+阿里云OSS搭建博客图床（超详细）</a>配置写作环境</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/358739246">使用Vercel+GitHub快速构建Hexo博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/26a726baf70e">手把手教你使用Hexo+GiteePages搭建一个免费的个人博客（个人网站）-小白看了也能搞</a></p>
+<p><a target="_blank" rel="noopener" href="https://fmcf.cc/technology/400/">使用Vercel+GitHub快速构建Hexo博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/33921436">Namesilo 域名购买及使用教程（附 Namesilo 优惠码）</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19363379/article/details/108119140">搭建个人网站（2）：Github和Vercel建站以及配置DNS</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Hexo+GitHub+Vercel搭建个人博客网站</p><p><a href="http://example.com/2022/04/02/Hexo+GitHub+Vercel搭建个人博客网站/">http://example.com/2022/04/02/Hexo+GitHub+Vercel搭建个人博客网站/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Ye Zifeng</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-04-02</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-04-02</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/">网站搭建</a><a class="link-muted mr-2" rel="tag" href="/tags/Hexo/">Hexo</a><a class="link-muted mr-2" rel="tag" href="/tags/GitHub/">GitHub</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/03/31/blog3-31/"><span class="level-item">Hello world</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#Hexo"><span class="level-left"><span class="level-item">1</span><span class="level-item">Hexo</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#安装nodejs"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">安装nodejs</span></span></a></li><li><a class="level is-mobile" href="#安装Hexo"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">安装Hexo</span></span></a></li><li><a class="level is-mobile" href="#初始化Hexo博客（个人网站）文件夹"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">初始化Hexo博客（个人网站）文件夹</span></span></a></li></ul></li><li><a class="level is-mobile" href="#GitHub"><span class="level-left"><span class="level-item">2</span><span class="level-item">GitHub</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#新建仓库"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">新建仓库</span></span></a></li><li><a class="level is-mobile" href="#设置-Git"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">设置 Git</span></span></a></li><li><a class="level is-mobile" href="#验证是否成功"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">验证是否成功</span></span></a></li><li><a class="level is-mobile" href="#部署到-GitHub"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">部署到 GitHub</span></span></a></li></ul></li><li><a class="level is-mobile" href="#主题优化"><span class="level-left"><span class="level-item">3</span><span class="level-item">主题优化</span></span></a></li><li><a class="level is-mobile" href="#镜像加速"><span class="level-left"><span class="level-item">4</span><span class="level-item">镜像加速</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#注册账号"><span class="level-left"><span class="level-item">4.1</span><span class="level-item">注册账号</span></span></a></li><li><a class="level is-mobile" href="#导入项目"><span class="level-left"><span class="level-item">4.2</span><span class="level-item">导入项目</span></span></a></li></ul></li><li><a class="level is-mobile" href="#自定义域名"><span class="level-left"><span class="level-item">5</span><span class="level-item">自定义域名</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#账户注册"><span class="level-left"><span class="level-item">5.1</span><span class="level-item">账户注册</span></span></a></li><li><a class="level is-mobile" href="#购买流程"><span class="level-left"><span class="level-item">5.2</span><span class="level-item">购买流程</span></span></a></li></ul></li><li><a class="level is-mobile" href="#参考资料"><span class="level-left"><span class="level-item">6</span><span class="level-item">参考资料</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Hexo/"><span class="level-start"><span class="level-item">Hexo</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/blog%E6%97%A5%E5%BF%97/"><span class="level-start"><span class="level-item">blog日志</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/bag.png" alt="FengLibrary" height="28"></a><p class="is-size-7"><span>&copy; 2022 Ye Zifeng</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yzfzzz"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><!--!--></body></html>
