@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>计算机眼中的图像 - FengLibrary</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="FengLibrary"><meta name="msapplication-TileImage" content="/img/book.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="FengLibrary"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="本文主要介绍基本的numpy和读取图片的操作"><meta property="og:type" content="blog"><meta property="og:title" content="计算机眼中的图像"><meta property="og:url" content="http://example.com/2022/04/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%9B%BE%E5%83%8F/"><meta property="og:site_name" content="FengLibrary"><meta property="og:description" content="本文主要介绍基本的numpy和读取图片的操作"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:published_time" content="2022-04-05T07:03:30.000Z"><meta property="article:modified_time" content="2022-04-05T07:33:48.608Z"><meta property="article:author" content="Ye Zifeng"><meta property="article:tag" content="Opencv4"><meta property="article:tag" content="python"><meta property="article:tag" content="计算机视觉"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com/2022/04/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%9B%BE%E5%83%8F/"},"headline":"计算机眼中的图像","image":["http://example.com/img/og_image.png"],"datePublished":"2022-04-05T07:03:30.000Z","dateModified":"2022-04-05T07:33:48.608Z","author":{"@type":"Person","name":"Ye Zifeng"},"publisher":{"@type":"Organization","name":"FengLibrary","logo":{"@type":"ImageObject","url":"http://example.com/img/bag.png"}},"description":"本文主要介绍基本的numpy和读取图片的操作"}</script><link rel="canonical" href="http://example.com/2022/04/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9C%BC%E4%B8%AD%E7%9A%84%E5%9B%BE%E5%83%8F/"><link rel="icon" href="/img/book.png"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.15.2/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdnjs.loli.net/ajax/libs/pace/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+          Array
+              .from(document.querySelectorAll('.tab-content'))
+              .forEach($tab => {
+                  $tab.classList.add('is-hidden');
+              });
+          Array
+              .from(document.querySelectorAll('.tabs li'))
+              .forEach($tab => {
+                  $tab.classList.remove('is-active');
+              });
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.1.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/bag.png" alt="FengLibrary" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yzfzzz"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-04-05T07:03:30.000Z" title="2022/4/5 15:03:30">2022-04-05</time>发表</span><span class="level-item"><time dateTime="2022-04-05T07:33:48.608Z" title="2022/4/5 15:33:48">2022-04-05</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Opencv4/">Opencv4</a></span><span class="level-item">4 分钟读完 (大约657个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">计算机眼中的图像</h1><div class="content"><p>本文主要介绍基本的numpy和读取图片的操作</p>
+<span id="more"></span> 
+
+<h2 id="基本读写图像"><a href="#基本读写图像" class="headerlink" title="基本读写图像"></a>基本读写图像</h2><p>无论哪种格式，每一个像素都会有一个值，但不同格式表示像素的方式有所不同</p>
+<ul>
+<li><strong>numpy.zero(）函数</strong></li>
+</ul>
+<p>调用该函数，可以通过二维NumPy数组来简单创建一个黑色的正方形图像</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img=numpy.zeros((<span class="number">3</span>,<span class="number">3</span>),dtype=numpy.uint8)</span><br></pre></td></tr></table></figure>
+
+<p>控制台print一下，可得<br>$$<br>[[0 0 0]<br> [0 0 0]<br> [0 0 0]]<br>$$<br>该输出有两个[],说明该图像有两条通道，每一个像素都由一个8-bit整数表示，每个像素的范围是（0~255），其中，0表示最黑，255表示最白</p>
+<ul>
+<li><strong>cv2.cvtColor函数</strong></li>
+</ul>
+<p>使用该函数，可以把图像转化为BGR格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">img=cv2.cvtColor(img,cv2.COLOR_GRAY2BGR)</span><br></pre></td></tr></table></figure>
+
+<p>控制台print一下，可得<br>$$<br>[[[0 0 0]<br>  [0 0 0]<br>  [0 0 0]]</p>
+<p> [[0 0 0]<br>  [0 0 0]<br>  [0 0 0]]</p>
+<p> [[0 0 0]<br>  [0 0 0]<br>  [0 0 0]]]<br>$$<br>现在，每个像素点都由一个三元数组，并且每一个二维数组&#x2F;整形（integer）分别表示一个B&#x2F;G&#x2F;R通道</p>
+<ul>
+<li><strong>img.shape参数</strong></li>
+</ul>
+<p>可以通过shape属性来查看图像的结构，它会返回行和列，如果有2个及以上的通道，还会返回通道数</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(img.shape)</span><br></pre></td></tr></table></figure>
+
+<p>返回（414，500，3）；414代表高【h】，500代表宽【w】，3是通道数【c】&#x2F;或者说像素红绿蓝也行</p>
+<ul>
+<li><strong>图像的读取及保存</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">image = cv2.imread(<span class="string">&#x27;D:/opencv/imgurl/1.png&#x27;</span>)</span><br><span class="line">cv2.imwrite(<span class="string">&#x27;D:/opencv/imgurl/1.png&#x27;</span>,image)</span><br></pre></td></tr></table></figure>
+
+<p>这段代码，读取一张png图片，然后把它保存为jpg格式</p>
+<ul>
+<li><strong>将图片转换成灰度图，并保存</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grayImage = cv2.imread(<span class="string">&#x27;D:/opencv/imgurl/1.png&#x27;</span>,cv2.IMREAD_GRAYSCALE)</span><br><span class="line">cv2.imwrite(<span class="string">&#x27;D:/opencv/imgurl/1.png&#x27;</span>,grayImage)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="打开图像"><a href="#打开图像" class="headerlink" title="打开图像"></a>打开图像</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;D:/opencv/imgurl/2.jpg&#x27;</span>)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;p&#x27;</span>,img)</span><br><span class="line">cv2.waitKey()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>cv2.imread()函数</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imread(&#x27;D:/opencv/imgurl/1.png&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p>功能：读取图片</p>
+<p>输入参数1：图片的路径（仅英文）</p>
+<ul>
+<li><strong>cv2.imshow()函数</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(&#x27;openpng&#x27;,img)</span><br></pre></td></tr></table></figure>
+
+<p>功能：窗口展示图像</p>
+<p>输入参数1是给窗口命名(命名只能是英文)，输入参数2是已imread的图像</p>
+<ul>
+<li><strong>cv2.waitKey()函数</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#等待时间，毫秒级别，0表示任意键终止</span><br><span class="line">cv2.waitKey(1000)</span><br></pre></td></tr></table></figure>
+
+<p>功能：等待键盘输入，函数WaitKey无限地等待一个键事件，如果没有键，则返回-1；触发这段代码，窗口消失</p>
+<p>输入参数1：等待的时间，0表示任意键</p>
+<ul>
+<li><strong>cv2.destroyAllWindow（）函数</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<p>功能：关掉所有窗口，销毁内存</p>
+<h2 id="查询图像的信息"><a href="#查询图像的信息" class="headerlink" title="查询图像的信息"></a>查询图像的信息</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(img1)) <span class="comment">#查询底层格式</span></span><br><span class="line"><span class="built_in">print</span>(img1.size) <span class="comment">#计算像素点的个数</span></span><br><span class="line"><span class="built_in">print</span>(img1.dtype) <span class="comment">#查询数据的类型</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+</div><div class="article-licensing box"><div class="licensing-title"><p>计算机眼中的图像</p><p><a href="http://example.com/2022/04/05/计算机眼中的图像/">http://example.com/2022/04/05/计算机眼中的图像/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>Ye Zifeng</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-04-05</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2022-04-05</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/Opencv4/">Opencv4</a><a class="link-muted mr-2" rel="tag" href="/tags/python/">python</a><a class="link-muted mr-2" rel="tag" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">计算机视觉</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/04/05/Matplotlib%E5%85%A5%E9%97%A8/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">在OpenCV中加载彩色图像并将其显示在Matplotlib中</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2022/04/02/Hexo+GitHub+Vercel/"><span class="level-item">Hexo+GitHub+Vercel搭建个人博客网站</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#基本读写图像"><span class="level-left"><span class="level-item">1</span><span class="level-item">基本读写图像</span></span></a></li><li><a class="level is-mobile" href="#打开图像"><span class="level-left"><span class="level-item">2</span><span class="level-item">打开图像</span></span></a></li><li><a class="level is-mobile" href="#查询图像的信息"><span class="level-left"><span class="level-item">3</span><span class="level-item">查询图像的信息</span></span></a></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Hexo/"><span class="level-start"><span class="level-item">Hexo</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Opencv4/"><span class="level-start"><span class="level-item">Opencv4</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/blog%E6%97%A5%E5%BF%97/"><span class="level-start"><span class="level-item">blog日志</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">四月 2022</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">三月 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/bag.png" alt="FengLibrary" height="28"></a><p class="is-size-7"><span>&copy; 2022 Ye Zifeng</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yzfzzz"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/cookieconsent/3.1.1/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.10.0/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><!--!--></body></html>
